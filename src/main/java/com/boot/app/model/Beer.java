@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public class Beer {
 
     @Id
-    private long id;
+    private BigInteger id;
     private String name;
     private String producer;
     private String country;

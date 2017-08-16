@@ -21,19 +21,19 @@ public class ApiController {
 
     private final BeerService beerService;
 
-    @GetMapping("/get")
-    public Iterable<Beer> getAll() {
-        return beerService.getAll();
+    @GetMapping("/{id}")
+    public Beer get(@PathVariable Long id) {
+        return beerService.getById(id);
     }
 
-    @GetMapping("/get/name/{name}")
+    @GetMapping("/name/{name}")
     public List<Beer> getByName(@PathVariable String name) {
         return beerService.getByName(name);
     }
 
-    @GetMapping("/get/{id}")
-    public Beer get(@PathVariable Long id) {
-        return beerService.getById(id);
+    @GetMapping
+    public Iterable<Beer> getAll() {
+        return beerService.getAll();
     }
 
     @PostMapping
