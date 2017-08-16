@@ -2,6 +2,7 @@ package com.boot.app.service;
 
 import com.boot.app.model.Beer;
 import com.boot.app.repository.BeerRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +21,17 @@ public class BeerService {
     }
 
     @Transactional(readOnly = true)
-    public List<Beer> getByName(String name) {
+    public List<Beer> getByName(@NonNull String name) {
         return beerRepository.findAllByName(name);
     }
 
     @Transactional(readOnly = true)
-    public Beer getById(Long id) {
+    public Beer getById(@NonNull Long id) {
         return beerRepository.findOne(id);
     }
 
     @Transactional
-    public Beer save(Beer beer) {
+    public Beer save(@NonNull Beer beer) {
         return beerRepository.save(beer);
     }
 }

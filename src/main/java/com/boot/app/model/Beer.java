@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Beer {
 
     @Id
-    private int id;
+    private long id;
     private String name;
     private String producer;
     private String country;

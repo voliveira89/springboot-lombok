@@ -3,15 +3,21 @@ package com.boot.app.controller;
 import com.boot.app.model.Beer;
 import com.boot.app.service.BeerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+
+import static com.boot.app.controller.ApiController.API_ENDPOINT;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(API_ENDPOINT)
 public class ApiController {
+
+    static final String API_ENDPOINT = "/beer";
 
     private final BeerService beerService;
 
@@ -30,9 +36,9 @@ public class ApiController {
         return beerService.getById(id);
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<String> newBeer(@RequestBody Beer beer) {
-        beerService.save(beer);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Void> newBeer(@RequestBody Beer beer) throws URISyntaxException {
+        Beer newBeer = beerService.save(beer);
+        return ResponseEntity.created(new URI(API_ENDPOINT + "/get/" + newBeer.getId())).build();
     }
 }
